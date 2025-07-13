@@ -1,935 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication Portal</title>
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-light: #4895ef;
-            --secondary: #3f37c9;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --success: #4cc9f0;
-            --error: #f72585;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('https://placehold.co/1920x1080');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 0;
-        }
-        
-        .container {
-            position: relative;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 400px;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .form-container {
-            width: 200%;
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        
-        .login-form, .register-form {
-            width: 50%;
-            padding: 2rem;
-        }
-        
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .form-header img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-        
-        .form-header h2 {
-            font-size: 1.8rem;
-            color: var(--secondary);
-        }
-        
-        .input-group {
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .input-group input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .password-container {
-            position: relative;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #777;
-        }
-        
-        .password-strength {
-            height: 4px;
-            background: #eee;
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        
-        .strength-meter {
-            height: 100%;
-            width: 0;
-            background: var(--error);
-            transition: all 0.3s;
-        }
-        
-        .terms {
-            display: flex;
-            align-items: center;
-            margin: 1rem 0;
-        }
-        
-        .terms input {
-            margin-right: 8px;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary);
-        }
-        
-        .toggle-form {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        
-        .toggle-form a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .toggle-form a:hover {
-            text-decoration: underline;
-        }
-        
-        .error-message {
-            color: var(--error);
-            font-size: 0.8rem;
-            margin-top: 4px;
-            display: none;
-        }
-        
-        .success-message {
-            text-align: center;
-            color: var(--success);
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        @media (max-width: 500px) {
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Simple CRUD App</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+    li {
+      background: #e3f2fd;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      position: relative;
+    }
+    .delete-btn {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: crimson;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-container" id="formContainer">
-            <div class="login-form">
-                <div class="form-header">
-                    <img src="https://placehold.co/300x300" alt="Company logo showing a stylized letter A inside a blue circle with gradient background" />
-                    <h2>Login to Your Account</h2>
-                </div>
-                <form id="loginForm">
-                    <div class="input-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" required>
-                        <div class="error-message" id="loginEmailError">Please enter a valid email</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="loginPassword">Password</label>
-                        <div class="password-container">
-                            <input type="password" id="loginPassword" required>
-                            <span class="password-toggle" id="loginToggle">show</span>
-                        </div>
-                        <div class="error-message" id="loginPasswordError">Password is required</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign In</button>
-                    <div class="success-message" id="loginSuccess">Login successful! Redirecting...</div>
-                </form>
-                <div class="toggle-form">
-                    Don't have an account? <a id="showRegister">Register here</a>
-                </div>
-            </div>
-            
-            <div class="register-form">
-                <div class="form-header">
-                    <img src="https://placehold.co/300x300" alt="Company logo showing a stylized letter A inside a blue circle with gradient background" />
-                    <h2>Create New Account</h2>
-                </div>
-                <form id="registerForm">
-                    <div class="input-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
-                        <div class="error-message" id="registerNameError">Please enter your name</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                        <div class="error-message" id="registerEmailError">Please enter a valid email</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerPassword">Password</label>
-                        <div class="password-container">
-                            <input type="password" id="registerPassword" required>
-                            <span class="password-toggle" id="registerToggle">show</span>
-                        </div>
-                        <div class="password-strength">
-                            <div class="strength-meter" id="strengthMeter"></div>
-                        </div>
-                        <div class="error-message" id="registerPasswordError">Password must be at least 8 characters</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerConfirm">Confirm Password</label>
-                        <input type="password" id="registerConfirm" required>
-                        <div class="error-message" id="registerConfirmError">Passwords must match</div>
-                    </div>
-                    <div class="terms">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Account</button>
-                    <div class="success-message" id="registerSuccess">Registration successful! Please login.</div>
-                </form>
-                <div class="toggle-form">
-                    Already have an account? <a id="showLogin">Login here</a>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
+    <h1>Simple CRUD App</h1>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Form toggling
-            const formContainer = document.getElementById('formContainer');
-            const showRegister = document.getElementById('showRegister');
-            const showLogin = document.getElementById('showLogin');
-            
-            showRegister.addEventListener('click', function() {
-                formContainer.style.transform = 'translateX(-50%)';
-            });
-            
-            showLogin.addEventListener('click', function() {
-                formContainer.style.transform = 'translateX(0)';
-            });
-            
-            // Password toggle
-            const setupPasswordToggle = (inputId, toggleId) => {
-                const passwordInput = document.getElementById(inputId);
-                const toggle = document.getElementById(toggleId);
-                
-                toggle.addEventListener('click', function() {
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        toggle.textContent = 'hide';
-                    } else {
-                        passwordInput.type = 'password';
-                        toggle.textContent = 'show';
-                    }
-                });
-            };
-            
-            setupPasswordToggle('loginPassword', 'loginToggle');
-            setupPasswordToggle('registerPassword', 'registerToggle');
-            
-            // Password strength
-            const passwordInput = document.getElementById('registerPassword');
-            const strengthMeter = document.getElementById('strengthMeter');
-            
-            passwordInput.addEventListener('input', function() {
-                const password = passwordInput.value;
-                let strength = 0;
-                
-                if (password.length >= 8) strength += 1;
-                if (password.length >= 12) strength += 1;
-                if (/[A-Z]/.test(password)) strength += 1;
-                if (/[0-9]/.test(password)) strength += 1;
-                if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-                
-                const width = (strength / 5) * 100;
-                strengthMeter.style.width = width + '%';
-                
-                if (password.length === 0) {
-                    strengthMeter.style.width = '0';
-                } else if (strength <= 2) {
-                    strengthMeter.style.backgroundColor = 'var(--error)';
-                } else if (strength <= 4) {
-                    strengthMeter.style.backgroundColor = 'orange';
-                } else {
-                    strengthMeter.style.backgroundColor = 'var(--success)';
-                }
-            });
-            
-            // Form validation
-            const validateLoginForm = (e) => {
-                e.preventDefault();
-                let isValid = true;
-                
-                const email = document.getElementById('loginEmail');
-                const password = document.getElementById('loginPassword');
-                const emailError = document.getElementById('loginEmailError');
-                const passwordError = document.getElementById('loginPasswordError');
-                const successMessage = document.getElementById('loginSuccess');
-                
-                // Reset errors
-                emailError.style.display = 'none';
-                passwordError.style.display = 'none';
-                
-                // Validate email
-                if (!email.value || !email.value.includes('@')) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate password
-                if (!password.value) {
-                    passwordError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    // Here you would typically make an AJAX request to your backend
-                    console.log('Login submitted', { email: email.value, password: password.value });
-                    successMessage.style.display = 'block';
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        // Redirect or do something else on successful login
-                    }, 2000);
-                }
-            };
-            
-            const validateRegisterForm = (e) => {
-                e.preventDefault();
-                let isValid = true;
-                
-                const name = document.getElementById('registerName');
-                const email = document.getElementById('registerEmail');
-                const password = document.getElementById('registerPassword');
-                const confirm = document.getElementById('registerConfirm');
-                const terms = document.getElementById('terms');
-                
-                const nameError = document.getElementById('registerNameError');
-                const emailError = document.getElementById('registerEmailError');
-                const passwordError = document.getElementById('registerPasswordError');
-                const confirmError = document.getElementById('registerConfirmError');
-                const successMessage = document.getElementById('registerSuccess');
-                
-                // Reset errors
-                nameError.style.display = 'none';
-                emailError.style.display = 'none';
-                passwordError.style.display = 'none';
-                confirmError.style.display = 'none';
-                
-                // Validate name
-                if (!name.value) {
-                    nameError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate email
-                if (!email.value || !email.value.includes('@')) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate password
-                if (!password.value || password.value.length < 8) {
-                    passwordError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate confirm password
-                if (password.value !== confirm.value) {
-                    confirmError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate terms
-                if (!terms.checked) {
-                    // Show terms error (you might want to add this)
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    // Here you would typically make an AJAX request to your backend
-                    console.log('Registration submitted', {
-                        name: name.value,
-                        email: email.value,
-                        password: password.value
-                    });
-                    successMessage.style.display = 'block';
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        formContainer.style.transform = 'translateX(0)';
-                        registerForm.reset();
-                    }, 2000);
-                }
-            };
-            
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            
-            loginForm.addEventListener('submit', validateLoginForm);
-            registerForm.addEventListener('submit', validateRegisterForm);
-        });
-    </script>
-</body>
-</html>
+    <form id="itemForm">
+      <input type="text" id="title" placeholder="Title" required>
+      <input type="text" id="description" placeholder="Description" required>
+      <button type="submit">Add Item</button>
+    </form>
 
-```
+    <ul id="itemList"></ul>
+  </div>
 
-🎨 **Generating images based on descriptions...**
+  <script>
+    const form = document.getElementById('itemForm');
+    const list = document.getElementById('itemList');
 
-✅ **Images generated successfully! Here's your updated content:**
+    async function fetchItems() {
+      const res = await fetch('/api/items');
+      const items = await res.json();
+      list.innerHTML = '';
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <strong>${item.title}</strong>: ${item.description}
+          <button class="delete-btn" onclick="deleteItem('${item._id}')">Delete</button>
+        `;
+        list.appendChild(li);
+      });
+    }
 
-`auth_interface.html`
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication Portal</title>
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-light: #4895ef;
-            --secondary: #3f37c9;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --success: #4cc9f0;
-            --error: #f72585;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background-color: var(--light);
-            color: var(--dark);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/7a055117-95b8-40f3-aa65-dde50d001b65.png');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 0;
-        }
-        
-        .container {
-            position: relative;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 400px;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .form-container {
-            width: 200%;
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        
-        .login-form, .register-form {
-            width: 50%;
-            padding: 2rem;
-        }
-        
-        .form-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .form-header img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-        }
-        
-        .form-header h2 {
-            font-size: 1.8rem;
-            color: var(--secondary);
-        }
-        
-        .input-group {
-            margin-bottom: 1rem;
-            position: relative;
-        }
-        
-        .input-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .input-group input:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-        
-        .password-container {
-            position: relative;
-        }
-        
-        .password-toggle {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #777;
-        }
-        
-        .password-strength {
-            height: 4px;
-            background: #eee;
-            border-radius: 2px;
-            margin-top: 8px;
-            overflow: hidden;
-        }
-        
-        .strength-meter {
-            height: 100%;
-            width: 0;
-            background: var(--error);
-            transition: all 0.3s;
-        }
-        
-        .terms {
-            display: flex;
-            align-items: center;
-            margin: 1rem 0;
-        }
-        
-        .terms input {
-            margin-right: 8px;
-        }
-        
-        .btn {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--secondary);
-        }
-        
-        .toggle-form {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        
-        .toggle-form a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        
-        .toggle-form a:hover {
-            text-decoration: underline;
-        }
-        
-        .error-message {
-            color: var(--error);
-            font-size: 0.8rem;
-            margin-top: 4px;
-            display: none;
-        }
-        
-        .success-message {
-            text-align: center;
-            color: var(--success);
-            margin-top: 1rem;
-            display: none;
-        }
-        
-        @media (max-width: 500px) {
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="form-container" id="formContainer">
-            <div class="login-form">
-                <div class="form-header">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8a608647-b2ce-4618-a48f-8cd778ed7fb5.png" alt="Company logo showing a stylized letter A inside a blue circle with gradient background" />
-                    <h2>Login to Your Account</h2>
-                </div>
-                <form id="loginForm">
-                    <div class="input-group">
-                        <label for="loginEmail">Email</label>
-                        <input type="email" id="loginEmail" required>
-                        <div class="error-message" id="loginEmailError">Please enter a valid email</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="loginPassword">Password</label>
-                        <div class="password-container">
-                            <input type="password" id="loginPassword" required>
-                            <span class="password-toggle" id="loginToggle">show</span>
-                        </div>
-                        <div class="error-message" id="loginPasswordError">Password is required</div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign In</button>
-                    <div class="success-message" id="loginSuccess">Login successful! Redirecting...</div>
-                </form>
-                <div class="toggle-form">
-                    Don't have an account? <a id="showRegister">Register here</a>
-                </div>
-            </div>
-            
-            <div class="register-form">
-                <div class="form-header">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/198f8d61-7303-4886-ba43-5e865f33b004.png" alt="Company logo showing a stylized letter A inside a blue circle with gradient background" />
-                    <h2>Create New Account</h2>
-                </div>
-                <form id="registerForm">
-                    <div class="input-group">
-                        <label for="registerName">Full Name</label>
-                        <input type="text" id="registerName" required>
-                        <div class="error-message" id="registerNameError">Please enter your name</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerEmail">Email</label>
-                        <input type="email" id="registerEmail" required>
-                        <div class="error-message" id="registerEmailError">Please enter a valid email</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerPassword">Password</label>
-                        <div class="password-container">
-                            <input type="password" id="registerPassword" required>
-                            <span class="password-toggle" id="registerToggle">show</span>
-                        </div>
-                        <div class="password-strength">
-                            <div class="strength-meter" id="strengthMeter"></div>
-                        </div>
-                        <div class="error-message" id="registerPasswordError">Password must be at least 8 characters</div>
-                    </div>
-                    <div class="input-group">
-                        <label for="registerConfirm">Confirm Password</label>
-                        <input type="password" id="registerConfirm" required>
-                        <div class="error-message" id="registerConfirmError">Passwords must match</div>
-                    </div>
-                    <div class="terms">
-                        <input type="checkbox" id="terms" required>
-                        <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Create Account</button>
-                    <div class="success-message" id="registerSuccess">Registration successful! Please login.</div>
-                </form>
-                <div class="toggle-form">
-                    Already have an account? <a id="showLogin">Login here</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value;
+      const description = document.getElementById('description').value;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Form toggling
-            const formContainer = document.getElementById('formContainer');
-            const showRegister = document.getElementById('showRegister');
-            const showLogin = document.getElementById('showLogin');
-            
-            showRegister.addEventListener('click', function() {
-                formContainer.style.transform = 'translateX(-50%)';
-            });
-            
-            showLogin.addEventListener('click', function() {
-                formContainer.style.transform = 'translateX(0)';
-            });
-            
-            // Password toggle
-            const setupPasswordToggle = (inputId, toggleId) => {
-                const passwordInput = document.getElementById(inputId);
-                const toggle = document.getElementById(toggleId);
-                
-                toggle.addEventListener('click', function() {
-                    if (passwordInput.type === 'password') {
-                        passwordInput.type = 'text';
-                        toggle.textContent = 'hide';
-                    } else {
-                        passwordInput.type = 'password';
-                        toggle.textContent = 'show';
-                    }
-                });
-            };
-            
-            setupPasswordToggle('loginPassword', 'loginToggle');
-            setupPasswordToggle('registerPassword', 'registerToggle');
-            
-            // Password strength
-            const passwordInput = document.getElementById('registerPassword');
-            const strengthMeter = document.getElementById('strengthMeter');
-            
-            passwordInput.addEventListener('input', function() {
-                const password = passwordInput.value;
-                let strength = 0;
-                
-                if (password.length >= 8) strength += 1;
-                if (password.length >= 12) strength += 1;
-                if (/[A-Z]/.test(password)) strength += 1;
-                if (/[0-9]/.test(password)) strength += 1;
-                if (/[^A-Za-z0-9]/.test(password)) strength += 1;
-                
-                const width = (strength / 5) * 100;
-                strengthMeter.style.width = width + '%';
-                
-                if (password.length === 0) {
-                    strengthMeter.style.width = '0';
-                } else if (strength <= 2) {
-                    strengthMeter.style.backgroundColor = 'var(--error)';
-                } else if (strength <= 4) {
-                    strengthMeter.style.backgroundColor = 'orange';
-                } else {
-                    strengthMeter.style.backgroundColor = 'var(--success)';
-                }
-            });
-            
-            // Form validation
-            const validateLoginForm = (e) => {
-                e.preventDefault();
-                let isValid = true;
-                
-                const email = document.getElementById('loginEmail');
-                const password = document.getElementById('loginPassword');
-                const emailError = document.getElementById('loginEmailError');
-                const passwordError = document.getElementById('loginPasswordError');
-                const successMessage = document.getElementById('loginSuccess');
-                
-                // Reset errors
-                emailError.style.display = 'none';
-                passwordError.style.display = 'none';
-                
-                // Validate email
-                if (!email.value || !email.value.includes('@')) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate password
-                if (!password.value) {
-                    passwordError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    // Here you would typically make an AJAX request to your backend
-                    console.log('Login submitted', { email: email.value, password: password.value });
-                    successMessage.style.display = 'block';
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        // Redirect or do something else on successful login
-                    }, 2000);
-                }
-            };
-            
-            const validateRegisterForm = (e) => {
-                e.preventDefault();
-                let isValid = true;
-                
-                const name = document.getElementById('registerName');
-                const email = document.getElementById('registerEmail');
-                const password = document.getElementById('registerPassword');
-                const confirm = document.getElementById('registerConfirm');
-                const terms = document.getElementById('terms');
-                
-                const nameError = document.getElementById('registerNameError');
-                const emailError = document.getElementById('registerEmailError');
-                const passwordError = document.getElementById('registerPasswordError');
-                const confirmError = document.getElementById('registerConfirmError');
-                const successMessage = document.getElementById('registerSuccess');
-                
-                // Reset errors
-                nameError.style.display = 'none';
-                emailError.style.display = 'none';
-                passwordError.style.display = 'none';
-                confirmError.style.display = 'none';
-                
-                // Validate name
-                if (!name.value) {
-                    nameError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate email
-                if (!email.value || !email.value.includes('@')) {
-                    emailError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate password
-                if (!password.value || password.value.length < 8) {
-                    passwordError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate confirm password
-                if (password.value !== confirm.value) {
-                    confirmError.style.display = 'block';
-                    isValid = false;
-                }
-                
-                // Validate terms
-                if (!terms.checked) {
-                    // Show terms error (you might want to add this)
-                    isValid = false;
-                }
-                
-                if (isValid) {
-                    // Here you would typically make an AJAX request to your backend
-                    console.log('Registration submitted', {
-                        name: name.value,
-                        email: email.value,
-                        password: password.value
-                    });
-                    successMessage.style.display = 'block';
-                    setTimeout(() => {
-                        successMessage.style.display = 'none';
-                        formContainer.style.transform = 'translateX(0)';
-                        registerForm.reset();
-                    }, 2000);
-                }
-            };
-            
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            
-            loginForm.addEventListener('submit', validateLoginForm);
-            registerForm.addEventListener('submit', validateRegisterForm);
-        });
-    </script>
+      await fetch('/api/items', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description })
+      });
+
+      form.reset();
+      fetchItems();
+    });
+
+    async function deleteItem(id) {
+      await fetch(`/api/items/${id}`, {
+        method: 'DELETE'
+      });
+      fetchItems();
+    }
+
+    // Load items on page load
+    fetchItems();
+  </script>
 </body>
 </html>
